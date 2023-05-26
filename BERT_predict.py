@@ -6,7 +6,7 @@ from transformers import TFBertModel
 from tensorflow.keras.models import load_model
 import numpy as np
 
-def send_text_via_websocket(url, text, time):
+'''def send_text_via_websocket(url, text, time):
     # 设置要发送的JSON数据
     json_data = {
         "msg": 11000,
@@ -39,12 +39,12 @@ ws.connect(websocket_url)
 send_text_via_websocket(websocket_url, "正在连接...", 10000)
 # 加载.h5模型
 model_path = 'BERT_12.h5'
-model = load_model(model_path, custom_objects={'TFBertModel': TFBertModel})
+model = load_model(model_path, custom_objects={'TFBertModel': TFBertModel})'''
 
 # 加载tokenizer
 vocab_path = 'chinese-pert-large/vocab.txt'
 tokenizer = BertTokenizer.from_pretrained(vocab_path, do_lower_case=False)
-send_text_via_websocket(websocket_url, "连接成功！", 2000)
+#send_text_via_websocket(websocket_url, "连接成功！", 2000)
 # 定义一个函数，将文本转化为BERT可识别的输入格式
 def prep_data(text, max_length):
     encoded_input = tokenizer.encode_plus(text,
@@ -65,24 +65,28 @@ previous_text = ""
 
 while True:
     # 读取文件中的文本
-    with open("E:/BERT/chatgpt.txt", "r") as file:
+'''
+        with open("E:/BERT/chatgpt.txt", "r") as file:
         current_text = file.readline().strip()
-
+'''
+    current_text = input("请输入：")
     # 判断当前文本与上一次读取的文本是否相同
     if current_text != previous_text:
         previous_text = current_text
 
         # 创建WebSocket连接
+'''     
         websocket_url = "ws://127.0.0.1:10086/api"
         ws = websocket.WebSocket()
         ws.connect(websocket_url)
-
+'''
         # 将文本转化为BERT的输入格式
         input_ids, attention_mask = prep_data(current_text, max_length)
 
         # 使用模型进行预测
         prediction = model.predict([input_ids, attention_mask])
-
+        print("输出：", prediction)
+'''
         # 提取最大概率对应的类别
         max_index = np.argmax(prediction)
         output = None
@@ -127,3 +131,4 @@ while True:
 
     # 延时0.1秒后继续读取文本进行判断
     time.sleep(0.1)
+'''
