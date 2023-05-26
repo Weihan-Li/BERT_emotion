@@ -1,6 +1,6 @@
 # BERT实践：进行一般文本的情绪分类
 
-BERT模型以及训练好的用于训练的h5模型上传在百度网盘：[BaiduDisk][https://pan.baidu.com/s/1wr7NVmHOeyHD6reChVKSFg] 提取码: 1234
+BERT模型以及训练好的用于训练的h5模型上传在百度网盘：[https://pan.baidu.com/s/1wr7NVmHOeyHD6reChVKSFg] 提取码: 1234
 
 目前情绪分类的准确率为68%左右
 
